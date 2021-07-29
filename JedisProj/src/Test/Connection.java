@@ -47,5 +47,31 @@ public class Connection {
 		System.out.println("一次性获取多个键值对:"+jedis.mget("name","age","salary","address"));
 	}
 	
+public static void typeList() {   //可视为链队
+		
+		System.out.println("切换到第1个数据库:"+jedis.select(0));
+		System.out.println("清空当前数据库数据:"+jedis.flushDB());
+		System.out.println("头插法:"+jedis.lpush("name", "cyka"));
+		System.out.println("尾插法:"+jedis.rpush("name", "blyat"));
+		System.out.println("尾插法:"+jedis.rpush("name", "pipe"));
+		System.out.println("尾插法:"+jedis.rpush("name", "water"));
+		System.out.println("头插法:"+jedis.lpush("name", "maozi"));
+		System.out.println("遍历所有元素:"+jedis.lrange("name",0,-1));
+		System.out.println("遍历下标为0到1的元素:"+jedis.lrange("name",0,1));
+		System.out.println("队头出队:"+jedis.lpop("name"));
+		
+		System.out.println("通过下标索引查询元素:"+jedis.lindex("name", 2));
+		System.out.println("查询链队的大小:"+jedis.llen("name"));
+		System.out.println("移除一个元素数值为pipe的元素（贪婪模式）:"+jedis.lrem("name",1,"pipe"));
+		System.out.println("截取下标1到2的元素，其他元素删除:"+jedis.ltrim("name",1,2));
+		
+		System.out.println("组合命令先将list的队尾元素踢出，再头插到otherlist里面:"+jedis.rpoplpush("name", "otherlist"));
+		System.out.println("修改下标为0的元素为Russia:"+jedis.lset("name",0,"Russia"));
+		System.out.println("在Russia的前面插入一个叫zard的元素:"+jedis.linsert("name",ListPosition.BEFORE,"Russia","zard"));
+		System.out.println("在zard的后面插入一个叫love的元素:"+jedis.linsert("name",ListPosition.AFTER,"zard","love"));
+		System.out.println("遍历所有元素:"+jedis.lrange("name",0,-1));
+		
+		
+	}
 	
 }
