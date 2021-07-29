@@ -112,6 +112,20 @@ public class Connection {
 		System.out.println("指定键number值-5:"+jedis.hincrBy("myhash","number",-5));
 	}
 
-	
+	public static void typeZset() {  //有序序列，排序依据是第一个成员
+		
+		System.out.println("新增<'15000,'zhangsan'>键值对:"+jedis.zadd("salary", 15000,"zhangsan"));
+		System.out.println("新增<'35000,'lisi'>键值对:"+jedis.zadd("salary", 35000,"lisi"));
+		System.out.println("新增<'50000,'wanger'>键值对:"+jedis.zadd("salary", 50000,"wanger"));
+		System.out.println("新增<'8000,'dbc'>键值对:"+jedis.zadd("salary", 8000,"dbc"));
+		System.out.println("输出所有键值对:"+jedis.zrange("salary", 0,-1));
+		System.out.println("移除名为dbc的数据:"+jedis.zrem("salary", "dbc"));
+		System.out.println("所有数据升序排列:"+jedis.zrangeByScore("salary", 0, 99999999));
+		System.out.println("20000-50000的数据升序排列:"+jedis.zrangeByScore("salary", 20000, 50000));
+		System.out.println("所有数据降序排列:"+jedis.zrevrange("salary", 0, -1));
+		
+		System.out.println("计算15000-40000范围内的数据数量:"+jedis.zcount("salary", 15000, 40000));
+		
+	}
 	
 }
