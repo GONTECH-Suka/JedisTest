@@ -96,5 +96,22 @@ public class Connection {
 	
 	}
 	
+	public static void typeHash() {
+		System.out.println("切换到第3个数据库:"+jedis.select(2));
+		System.out.println("清空当前数据库数据:"+jedis.flushDB());
+		System.out.println("新增<'name,'zhangsan'>键值对:"+jedis.hset("myhash","name","zhangsan"));
+		System.out.println("新增<'number,'114514'>键值对:"+jedis.hset("myhash", "number","114514"));
+		System.out.println("myhash里所有键值对:"+jedis.hgetAll("myhash"));
+		System.out.println("删除键name:"+jedis.hdel("myhash","name"));
+		System.out.println("获取指定哈希的长度:"+jedis.hlen("myhash"));
+		System.out.println("查看指定key->myhash是否存在:"+jedis.hexists("myhash","number"));
+		System.out.println("查看指定哈希表所有的key:"+jedis.hkeys("myhash"));
+		System.out.println("查看指定哈希表所有的value:"+jedis.hvals("myhash"));
+		
+		System.out.println("指定键number值＋10:"+jedis.hincrBy("myhash","number",10));
+		System.out.println("指定键number值-5:"+jedis.hincrBy("myhash","number",-5));
+	}
+
+	
 	
 }
