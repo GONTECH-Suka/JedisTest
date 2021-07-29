@@ -47,7 +47,7 @@ public class Connection {
 		System.out.println("一次性获取多个键值对:"+jedis.mget("name","age","salary","address"));
 	}
 	
-public static void typeList() {   //可视为链队
+	public static void typeList() {   //可视为链队
 		
 		System.out.println("切换到第1个数据库:"+jedis.select(0));
 		System.out.println("清空当前数据库数据:"+jedis.flushDB());
@@ -73,5 +73,28 @@ public static void typeList() {   //可视为链队
 		
 		
 	}
+	
+	public static void typeSet() {    //Set不允许重复成员
+	
+		System.out.println("切换到第16个数据库:"+jedis.select(15));
+		System.out.println("清空当前数据库数据:"+jedis.flushDB());
+		System.out.println("添加新成员（无序插入）:"+jedis.sadd("myset","cyka"));
+		System.out.println("添加新成员:"+jedis.sadd("myset","blyat"));
+		System.out.println("添加新成员:"+jedis.sadd("myset","Russia"));
+		System.out.println("遍历所有成员:"+jedis.smembers("myset"));
+		System.out.println("查询blyat成员是否存在:"+jedis.sismember("myset","blyat"));
+	
+		System.out.println("查询myset有几个成员:"+jedis.scard("myset"));
+		System.out.println("删除名为cyka的成员:"+jedis.srem("myset","cyka"));
+		System.out.println("随机抽取一个成员输出:"+jedis.srandmember("myset"));
+		System.out.println("随机抽取两个成员输出:"+jedis.srandmember("myset",2));
+		System.out.println("将myset的成员blyat移动到myset2上:"+jedis.smove("myset","myset2","blyat"));
+	
+		System.out.println("以myset为基准找差集:"+jedis.sdiff("myset","myset2"));
+		System.out.println("以myset为基准找交集:"+jedis.sinter("myset","myset2"));
+		System.out.println("以myset为基准找并集:"+jedis.sunion("myset","myset2"));
+	
+	}
+	
 	
 }
