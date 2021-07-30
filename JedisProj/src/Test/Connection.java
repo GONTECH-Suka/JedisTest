@@ -5,10 +5,16 @@ import redis.clients.jedis.Jedis;
 public class Connection {
 	
 	private static Jedis jedis = null;
+	private static String ADDR = "127.0.0.1";
+	private static int PORT = 6379;
 	
 	public static void main(String[] args) {
-		jedis = new Jedis("127.0.0.1",6379);
-		typeString();
+		jedis = new Jedis(ADDR,PORT);
+		//typeString();
+		//typeList();
+		//typeSet();
+		//typeHash();
+		typeZset();
 	}
 	
 	public static void typeString() {
