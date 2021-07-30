@@ -134,4 +134,17 @@ public class Connection {
 		
 	}
 	
+	public static void typeHyperloglog() {   //基数统计类型（基数就是不重复的数字）
+		
+		System.out.println("切换到第8个数据库:"+jedis.select(7));
+		System.out.println("清空当前数据库数据:"+jedis.flushDB());
+		System.out.println("给mykey1添加多个数据："+jedis.pfadd("mykey1", "a","b","c","d","b","d"));
+		System.out.println("给mykey2添加多个数据："+jedis.pfadd("mykey2", "e","f","g","a","c","d"));
+		
+		System.out.println("计算mykey1的基数数量："+jedis.pfcount("mykey1"));
+		System.out.println("合并两个mykey成一个mykey3,会去重："+jedis.pfmerge("mykey3","mykey1","mykey2"));
+		System.out.println("计算mykey3的基数数量："+jedis.pfcount("mykey3"));
+				
+	}
+	
 }
