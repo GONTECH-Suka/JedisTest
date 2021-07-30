@@ -147,4 +147,19 @@ public class Connection {
 				
 	}
 	
+	public static void typeBitmaps(){  //位存储类型，只能存储0和1一般用于记录状态
+		
+		System.out.println("切换到第8个数据库:"+jedis.select(7));
+		System.out.println("清空当前数据库数据:"+jedis.flushDB());
+		jedis.setbit("sign", 1, true);  //这里用了每周是否打卡的例子
+		jedis.setbit("sign", 2, false);
+		jedis.setbit("sign", 3, true);
+		jedis.setbit("sign", 4, true);
+		jedis.setbit("sign", 5, true);
+		jedis.setbit("sign", 6, false);
+		jedis.setbit("sign", 7, false);
+		System.out.println("获取5对应的布尔类型:"+jedis.getbit("sign",5));
+		System.out.println("计算sign里布尔类型为1的数值个数:"+jedis.bitcount("sign"));
+	}
+	
 }
