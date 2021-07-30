@@ -14,7 +14,11 @@ public class Connection {
 		//typeList();
 		//typeSet();
 		//typeHash();
-		typeZset();
+		//typeZset();
+		//typeHyperloglog();
+		//typeBitmaps();
+		
+		jedis.close();
 	}
 	
 	public static void typeString() {
